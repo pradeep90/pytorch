@@ -9,9 +9,27 @@
     , "torch/_appdirs.py"
     , "torch/multiprocessing/pool.py"
     , "torch/overrides.py"
+    , "caffe2/python/*"
+    , "caffe2/proto/*"
+    , "caffe2/core/nomnigraph/op_gen.py"
+    , "caffe2/contrib/playground/*"
+    , "caffe2/contrib/gloo/gloo_test.py"
+    , "caffe2/contrib/warpctc/ctc_ops_test.py"
+    , "caffe2/contrib/prof/cuda_profile_ops_test.py"
+    , "caffe2/contrib/nccl/nccl_ops_test.py"
+    , "caffe2/distributed/store_ops_test_util.py"
+    , "caffe2/experiments/python/device_reduce_sum_bench.py"
+    , "caffe2/experiments/python/SparseTransformer.py"
+    , "caffe2/experiments/python/convnet_benchmarks.py"
+    , "caffe2/contrib/aten/aten_test.py"
+    , "caffe2/contrib/aten/docs/sample.py"
+    , "caffe2/contrib/tensorboard/tensorboard_exporter.py"
+    , "caffe2/contrib/tensorboard/tensorboard_exporter_test.py"
+    , "caffe2/quantization/server/*"
   ],
   "source_directories": [
     {"import_root": ".", "source": "torch"}
+    , {"import_root": ".", "source": "caffe2"}
   ],
   "taint_models_path": "/Users/pradeepkumars/.venvs/torch_development/lib"
 }

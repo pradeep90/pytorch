@@ -1,4 +1,7 @@
 {
+  "exclude": [
+    ".*\/lib\/python3.6\/.*"
+  ],
   "ignore_all_errors": [
     "torch/testing/_internal/hypothesis_utils.py"
     , "torch/testing/_internal/common_quantization.py"

@@ -1,4 +1,15 @@
 {
+  "ignore_all_errors": [
+    "torch/testing/_internal/hypothesis_utils.py"
+    , "torch/testing/_internal/common_quantization.py"
+    , "torch/testing/_internal/generated/*"
+    , "torch/testing/_internal/distributed/*"
+    , "torch/nn/modules/pooling.py"
+    , "torch/nn/parallel/_functions.py"
+    , "torch/_appdirs.py"
+    , "torch/multiprocessing/pool.py"
+    , "torch/overrides.py"
+  ],
   "source_directories": [
     {"import_root": ".", "source": "torch"}
   ],

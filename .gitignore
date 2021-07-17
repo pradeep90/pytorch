@@ -313,3 +313,4 @@ pr.diff
 
 # coverage files
 */**/.coverage.*
+/.pyre/

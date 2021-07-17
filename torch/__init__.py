@@ -528,6 +528,7 @@ __all__.extend(['e', 'pi', 'nan', 'inf'])
 
 from ._tensor import Tensor
 from .storage import _StorageBase
+from ._C import *
 
 
 class DoubleStorage(_C.DoubleStorageBase, _StorageBase):

@@ -1,0 +1,6 @@
+{
+  "source_directories": [
+    {"import_root": ".", "source": "torch"}
+  ],
+  "taint_models_path": "/Users/pradeepkumars/.venvs/torch_development/lib"
+}

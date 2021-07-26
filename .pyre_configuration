@@ -1,6 +1,9 @@
 {
   "exclude": [
     ".*\/lib\/python3.6\/.*"
+    , ".*\/torch\/include\/.*"
+    , ".*\/torch\/csrc\/.*"
+    , ".*\/torch\/distributed\/elastic\/agent\/server\/api.py"
   ],
   "ignore_all_errors": [
     "torch/testing/_internal/hypothesis_utils.py"

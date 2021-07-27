@@ -2578,20 +2578,32 @@ class TestBinaryUfuncs(TestCase):
 
         import scipy.integrate
 
+        scipy_cumulative_trapezoid = None
+
+        if hasattr(scipy.integrate, 'cumulative_trapezoid'):
+            scipy_cumulative_trapezoid = scipy.integrate.cumulative_trapezoid
+        else:  # Older version of SciPy uses a different name
+            scipy_cumulative_trapezoid = scipy.integrate.cumtrapz
+
         def test_dx(sizes, dim, dx, device):
             t = torch.randn(sizes, device=device)
             y = t.cpu().numpy()
             actual = torch.cumulative_trapezoid(t, dx=dx, dim=dim)
-            expected = scipy.integrate.cumulative_trapezoid(t.cpu().numpy(), dx=dx, axis=dim)
+            expected = scipy_cumulative_trapezoid(t.cpu().numpy(), dx=dx, axis=dim)
             self.assertEqual(expected.shape, actual.shape)
-            self.assertEqual(expected, actual, exact_dtype=False)
+            self.assertEqual(expected, actual, exact_dtype=False, atol=1e-4, rtol=1e-4)
 
         def test_x(sizes, dim, x, device):
             t = torch.randn(sizes, device=device)
             actual = torch.cumulative_trapezoid(t, x=torch.tensor(x, device=device), dim=dim)
-            expected = scipy.integrate.cumulative_trapezoid(t.cpu().numpy(), x=x, axis=dim)
+            expected = scipy_cumulative_trapezoid(t.cpu().numpy(), x=x, axis=dim)
             self.assertEqual(expected.shape, actual.shape)
-            self.assertEqual(expected, actual.cpu(), exact_dtype=False)
+            self.assertEqual(expected, actual.cpu(), exact_dtype=False, atol=1e-4, rtol=1e-4)
+        
+        def test_empty_x(sizes, dim, x, device):
+            t = torch.randn(sizes, device=device)
+            actual = torch.cumulative_trapezoid(t, x=torch.tensor(x, device=device), dim=dim)
+            self.assertEqual(torch.empty(actual.shape), actual)
 
         test_dx((2,), -1, 1, device)
         test_dx((3, 3), -1, 1, device)
@@ -2601,6 +2613,8 @@ class TestBinaryUfuncs(TestCase):
         test_dx((1, 10), 0, 2.3, device)
         test_dx((0, 2), 0, 1.0, device)
         test_dx((0, 2), 1, 1.0, device)
+        test_dx((512, 512), 1, 1.0, device)
+        test_dx((100, 100, 100), 1, 1.0, device)
 
         test_x((2,), -1, [100, 50], device)
         test_x((4, 2), 0, [2, 3, 4, 5], device)
@@ -2609,7 +2623,7 @@ class TestBinaryUfuncs(TestCase):
         test_x((1, 10), 0, [1.0], device)
         test_x((0, 2), 1, [1, 2], device)
 
-        # test_x((0, 2), 0, [], device) # Scipy failing because x == [], but our version returns empty
+        test_empty_x((0, 2), 0, [], device) # SciPy failing when x == [], but our version returns empty
 
         with self.assertRaisesRegex(
                 IndexError,
@@ -2622,6 +2636,13 @@ class TestBinaryUfuncs(TestCase):
             test_x((2, 3), 1, [1.0, 2.0], device)
             test_x((0, 2), 0, [1.0, 2.0], device)
             test_x((2, 3), 1, [1.0, 2.0, 3.0, 4.0], device)
+        with self.assertRaisesRegex(
+            RuntimeError,
+            'Currently, we only support dx as a real number'):
+            test_dx((2,2), -1, complex(1, 1) , device)
+        with self.assertRaisesRegex(
+                TypeError, 'received an invalid combination of arguments'):
+            actual = torch.cumulative_trapezoid(torch.randn((3,3)), x=torch.randn((3,3)), dx=3)
 
     @dtypes(torch.double)
     def test_pow_scalar_overloads_mem_overlap(self, device, dtype):

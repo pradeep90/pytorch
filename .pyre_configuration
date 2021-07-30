@@ -32,31 +32,14 @@
     , "caffe2/contrib/tensorboard/tensorboard_exporter.py"
     , "caffe2/contrib/tensorboard/tensorboard_exporter_test.py"
     , "caffe2/quantization/server/*"
-    , "android/*"
-    , "aten/*"
-    , "benchmarks/*"
-    , "binaries/*"
-    , "build/*"
-    , "c10/*"
-    , "cmake/*"
-    , "docker/*"
-    , "docs/*"
-    , "ios/*"
-    , "modules/*"
-    , "mypy_plugins/*"
-    , "mypy_report/*"
-    , "scripts/*"
-    , "stubs/*"
-    , "submodules/*"
-    , "test/*"
-    , "third_party/*"
-    , "tools/*"
   ],
   "search_path": [
     "stubs"
   ],
   "source_directories": [
-    "."
+    {"import_root": ".", "source": "torch"}
+    , {"import_root": ".", "source": "caffe2"}
   ],
-  "taint_models_path": "/Users/pradeepkumars/.venvs/torch_development/lib"
+  "taint_models_path": "/Users/pradeepkumars/.venvs/torch_development/lib",
+  "use_command_v2": true
 }

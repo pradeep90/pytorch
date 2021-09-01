@@ -41,5 +41,6 @@
     , {"import_root": ".", "source": "caffe2"}
   ],
   "taint_models_path": "/Users/pradeepkumars/.venvs/torch_development/lib",
+  "typeshed": "/Users/pradeepkumars/.venvs/torch_development/lib/pyre_check/typeshed",
   "use_command_v2": true
 }

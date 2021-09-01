@@ -523,8 +523,6 @@ class SimpleElasticAgent(ElasticAgent):
         master_port = int(store.get("MASTER_PORT").decode(encoding="UTF-8"))
         return (master_addr, master_port)
 
-    # pyre-fixme[56]: Pyre was not able to infer the type of the decorator
-    #  `torch.distributed.elastic.metrics.prof`.
     @prof
     def _rendezvous(self, worker_group: WorkerGroup) -> None:
         r"""
@@ -583,8 +581,6 @@ class SimpleElasticAgent(ElasticAgent):
             list(range(prefix_sum, prefix_sum + role_infos[role_idx].local_world_size)),
         )
 
-    # pyre-fixme[56]: Pyre was not able to infer the type of the decorator
-    #  `torch.distributed.elastic.metrics.prof`.
     @prof
     def _assign_worker_ranks(
         self, store, group_rank: int, group_world_size: int, spec: WorkerSpec
@@ -653,8 +649,6 @@ class SimpleElasticAgent(ElasticAgent):
         ]
         return role_infos
 
-    # pyre-fixme[56]: Pyre was not able to infer the type of the decorator
-    #  `torch.distributed.elastic.metrics.prof`.
     @prof
     def _initialize_workers(self, worker_group: WorkerGroup) -> None:
         r"""
@@ -685,8 +679,6 @@ class SimpleElasticAgent(ElasticAgent):
 
         worker_group.state = WorkerState.HEALTHY
 
-    # pyre-fixme[56]: Pyre was not able to infer the type of the decorator
-    #  `torch.distributed.elastic.metrics.prof`.
     @prof
     def _restart_workers(self, worker_group: WorkerGroup) -> None:
         """
@@ -699,8 +691,6 @@ class SimpleElasticAgent(ElasticAgent):
         worker_group.state = WorkerState.STOPPED
         self._initialize_workers(worker_group)
 
-    # pyre-fixme[56]: Pyre was not able to infer the type of the decorator
-    #  `torch.distributed.elastic.metrics.prof`.
     @prof
     def run(self, role: str = DEFAULT_ROLE) -> RunResult:
         start_time = time.monotonic()

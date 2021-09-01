@@ -185,8 +185,6 @@ def _get_addr_and_port(
     return (master_addr, master_port)
 
 
-# pyre-fixme[56]: Pyre was not able to infer the type of the decorator
-# torch.distributed.elastic.multiprocessing.errors.record.
 def launch_agent(
     config: LaunchConfig,
     entrypoint: Union[Callable, str, None],

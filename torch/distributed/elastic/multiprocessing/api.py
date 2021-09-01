@@ -583,9 +583,6 @@ class SubprocessHandler:
 
     def _popen(self, args: Tuple, env: Dict[str, str]) -> subprocess.Popen:
         return subprocess.Popen(
-            # pyre-fixme[6]: Expected `Union[typing.Sequence[Union[_PathLike[bytes],
-            #  _PathLike[str], bytes, str]], bytes, str]` for 1st param but got
-            #  `Tuple[str, *Tuple[Any, ...]]`.
             args=args,
             env=env,
             stdout=self._stdout,

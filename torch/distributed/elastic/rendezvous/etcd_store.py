@@ -12,7 +12,6 @@ from typing import Optional
 
 import etcd  # type: ignore[import]
 
-# pyre-ignore[21]: Could not find name `Store` in `torch.distributed`.
 from torch.distributed import Store
 
 
@@ -22,7 +21,6 @@ def cas_delay():
     time.sleep(random.uniform(0, 0.1))
 
 
-# pyre-fixme[11]: Annotation `Store` is not defined as a type.
 class EtcdStore(Store):
     """
     Implements a c10 Store interface by piggybacking on the rendezvous etcd

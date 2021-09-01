@@ -11,7 +11,6 @@ import datetime
 import logging
 from typing import Tuple, cast, Optional
 
-# pyre-ignore[21]: Could not find name `Store` in `torch.distributed`.
 from torch.distributed import Store, TCPStore, PrefixStore
 from torch.distributed.elastic.rendezvous import RendezvousHandler, RendezvousParameters
 from torch.distributed.elastic.rendezvous.utils import parse_rendezvous_endpoint

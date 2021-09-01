@@ -117,14 +117,10 @@ class LocalElasticAgent(SimpleElasticAgent):
         log.info(f"log directory set to: {dir}")
         return dir
 
-    # pyre-fixme[56]: Pyre was not able to infer the type of the decorator
-    #  `torch.distributed.elastic.metrics.prof`.
     @prof
     def _stop_workers(self, worker_group: WorkerGroup) -> None:
         self._shutdown()
 
-    # pyre-fixme[56]: Pyre was not able to infer the type of the decorator
-    #  `torch.distributed.elastic.metrics.prof`.
     @prof
     def _start_workers(self, worker_group: WorkerGroup) -> Dict[int, Any]:
         spec = worker_group.spec
@@ -188,8 +184,6 @@ class LocalElasticAgent(SimpleElasticAgent):
         if self._pcontext:
             self._pcontext.close(death_sig)
 
-    # pyre-fixme[56]: Pyre was not able to infer the type of the decorator
-    #  `torch.distributed.elastic.metrics.prof`.
     @prof
     def _monitor_workers(self, worker_group: WorkerGroup) -> RunResult:
         role = worker_group.spec.role
